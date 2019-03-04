@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import { loginObj } from './login';
-//import { emojiObj } from './emoji';
-
 import {emojify} from 'react-emojione';
 const Linkify = require('linkifyjs/react');
 
-
-
-function convertURL(str){
+function convertUrlEmoji(str){
   let options = {/* … */};
   let content = emojify(str);
   return <Linkify tagName="span" options={options}>{content}</Linkify>;
     }
 
 function createUser(str) {
-  
 
   return (
   <div key={str.id}><br/>
-  <span className="messTime">{Unix_timestamp(str.timestamp)}</span><br/>
-  <span className="userName">{str.username + ": "}</span>
-  <span className="userMess">{convertURL(str.content)}</span>
-  
+  <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
+  <span className="userName"><b>{str.username + ": "}</b></span>
+  <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
   );
 }
@@ -32,27 +26,26 @@ function scrollBottom(){
       element.scrollTop = element.scrollHeight;
 }
 
+function Unix_timestamp(t){
+  let ts = new Date(t);
+  return ts.toLocaleString() + " ";
+}
+
 class ChatWindow extends Component {
   
   constructor(props) {
     super(props);
     
     this.state = {
-     username: "Jonas L",
-     content: "Test2",
+     username: "",
+     content: "",
      messages: [
     {
-      id: "message-1",
-      username: "Jonas",
-      content: "JOO",
-      timestamp: 1551191228686,
+      id: "",
+      username: "",
+      content: "",
+      timestamp: 0,
     },
-    {
-      id: "message-2",
-      username: "Jonas2",
-      content: "JOO2",
-      timestamp: 1551191228677,
-    }
   ]};
   this.onClick = this.onClick.bind(this);
   this.onChange = this.onChange.bind(this);
@@ -71,15 +64,16 @@ class ChatWindow extends Component {
     
     this.socket.on('new_message', function(data){
       this.setState({messages: [...this.state.messages, data]});
-  }.bind(this));
+   }.bind(this));
   }
+
   componentDidUpdate() {
     scrollBottom();
 }
+
   componentWillUnmount(){
     this.socket.disconnect();
     this.socket = null;
-    
 }
   
   onChange(e){
@@ -98,22 +92,21 @@ class ChatWindow extends Component {
         if (response.status === "error"){
           console.log("Fel");
         }
+
         let x = response.data.newMessage;
-        
         this.setState({messages: [...this.state.messages, x]});
-        scrollBottom(); 
       });
       document.querySelector(".textError").innerHTML = "";
     }
     else{
       document.querySelector(".textError").innerHTML = "Must type in text in the chat box to send message...";
     }
-    
   }
+
   onLogOut(){
     this.props.onOut();
-
   }
+
   render() {
     let x = this.state.messages.map(createUser);
     return (
@@ -128,19 +121,8 @@ class ChatWindow extends Component {
     <button onClick={this.onClick} className="sendBtn">Send</button>
     <div className="textError"></div>
     </div>
-    
     );
-
   }
-
 }
-
-
-function Unix_timestamp(t){
-  var ts = new Date(t);
-  return ts.toLocaleString() + " ";
-}
-
-
 
 export default ChatWindow;
