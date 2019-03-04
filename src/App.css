@@ -1,0 +1,137 @@
+body{
+  background: url(back_chat.jpg);
+}
+.mainRoot{
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translate(-50%, 0%);
+
+}
+.main{
+  width: 800px;
+  height: 445px;
+  border: 3px solid #719684;
+  margin-left: 10px;
+  padding: 5px;
+  padding-bottom: 3px;
+  overflow-x: auto;
+  border-radius: 0px 0px 5px 5px;
+  background: white;
+  word-break: break-all;
+}
+.mainHeader{
+  position: relative;
+  width: 806px;
+  height: 40px;
+  background: #719684;
+  margin-top: 10px;
+  margin-left: 10px;
+  color:#252c24;
+  padding-top: 15px;
+  padding-left: 10px;
+  border-radius: 5px 5px 0px 0px;
+}
+.inputText{
+  margin-left: 10px;
+  width: 700px;
+  height: 60px;
+  outline: none;
+  border: 3px solid#719684;
+  margin-top: 5px;
+  resize: none;
+  font-size: 16px;
+  border-radius: 5px;
+  background: white;
+}
+
+.sendBtn{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
+  width: 100px;
+  height: 68px;
+  border: none;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+  font-size: 20px;
+}
+.sendBtn:hover{
+  background-color: rgb(2, 182, 2);
+}
+.mainLogin{
+  position: absolute;
+  left: 50%;
+  top: 200px;
+  transform: translate(-50%, 0%);
+  width: 220px;
+  height: 120px;
+  border: 3px solid #719684;
+  padding: 20px;
+  border-radius: 5px;
+  background: white;
+}
+.userName{
+  color: red;
+}
+.messTime{
+  color: blue;
+  font-size: 12px;
+}
+.closeChat{
+  position: absolute;
+  right: 10px;
+  border-radius: 5px;
+  width: 60px;
+  height: 25px;
+  border: none;
+  background-color: green;
+  color: white;
+  outline: none;
+}
+.loginBtn{
+  position: relative;
+  top: -2px;
+  margin-left: 3px;
+  width: 50px;
+  height: 34px;
+  border-radius: 5px;
+  border: none;
+  background-color: green;
+  color: white;
+  outline: none;
+}
+.loginBtn:hover{
+  background-color: rgb(2, 182, 2);
+}
+.loginBtn:disabled{
+  background-color: darkgreen;
+  color: lightgray;
+}
+.loginMess{
+  color: red;
+  font-size: 12px;
+}
+.mainChatName{
+  position: absolute;
+  right: 100px;
+  color: #252c24;
+}
+.textError{
+  color: red;
+  margin-left: 10px;
+}
+.mainLoginInput{
+  width: 150px;
+  height: 25px;;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid #719684;
+  font-size: 18px;
+  padding: 3px;
+}
+.mainLoginTitle{
+  font-size: 20px;
+}
