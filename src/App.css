@@ -57,6 +57,7 @@ body{
   border-radius: 5px;
   outline: none;
   font-size: 20px;
+  cursor: pointer;
 }
 .sendBtn:hover{
   background-color: rgb(2, 182, 2);
@@ -77,6 +78,7 @@ body{
   color: red;
 }
 .messTime{
+  position: relative;
   color: blue;
   font-size: 12px;
 }
@@ -90,6 +92,10 @@ body{
   background-color: green;
   color: white;
   outline: none;
+  cursor: pointer;
+}
+.closeChat:hover{
+  background-color: rgb(2, 182, 2);
 }
 .loginBtn{
   position: relative;
@@ -102,6 +108,7 @@ body{
   background-color: green;
   color: white;
   outline: none;
+  cursor: pointer;
 }
 .loginBtn:hover{
   background-color: rgb(2, 182, 2);
@@ -111,7 +118,7 @@ body{
   color: lightgray;
 }
 .loginMess{
-  color: red;
+  color:blue;
   font-size: 12px;
 }
 .mainChatName{
@@ -134,4 +141,9 @@ body{
 }
 .mainLoginTitle{
   font-size: 20px;
+}
+.marioPic{
+ position: relative;
+ top: 9px;
+ margin-right: 3px;
 }

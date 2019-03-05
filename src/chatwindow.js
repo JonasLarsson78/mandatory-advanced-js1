@@ -15,7 +15,7 @@ function createUser(str) {
   return (
   <div key={str.id}><br/>
   <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
-  <span className="userName"><b>{str.username + ": "}</b></span>
+  <span className="userName"><span className="marioPic"><img  alt="mario" src={require("./mario_new.png")}/></span><b>{" - " + str.username + " - "}</b></span>
   <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
   );
