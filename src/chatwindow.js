@@ -58,9 +58,8 @@ class ChatWindow extends Component {
     this.socket.on('messages', function(data){
       this.setState({ messages: data });
     }.bind(this));
-
-    let login = loginObj.loginName;
-    this.setState({username: login});
+    
+    this.setState({username: loginObj.loginName});
     
     this.socket.on('new_message', function(data){
       this.setState({messages: [...this.state.messages, data]});
@@ -112,7 +111,7 @@ class ChatWindow extends Component {
     return (
     <div className="mainRoot">
     <div className="mainHeader">
-    <b><span role="img" aria-label="emoji1">🍄</span> Chat Window <span aria-label="emoji2" role="img">🍄</span></b>
+    <b><span role="img" aria-label="emoji1"> 🍄 </span> Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
     <span className="mainChatName"><b>Signed in as:</b> {this.state.username}</span>
     <button onClick={this.onLogOut} className="closeChat" title="Logout">Logout</button>
     </div>
