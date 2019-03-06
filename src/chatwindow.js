@@ -21,7 +21,6 @@ function Unix_timestamp(t){
 }
 
 function createUser(str) {
-  
   return (
   <div key={str.id}><br/>
   <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
@@ -35,9 +34,7 @@ class ChatWindow extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-     username: "",
-     content: "",
+    this.state = {theamname: "Marios", username: "", content: "",
      messages: [
     {
       id: "",
@@ -94,10 +91,13 @@ class ChatWindow extends Component {
       textarea.placeholder = "Must type in text in the chat box to send message...";
     }
   }
+
 mario = () => {
   let img = document.querySelectorAll(".charPic");
   let back = document.querySelector(".main");
   back.classList.remove("lugi");
+  back.classList.remove("peach");
+  this.setState({theamname: "Marios"});
   for (let i of img){
     i.src = require("./mario_new.png");
   }
@@ -105,20 +105,36 @@ mario = () => {
 lugi = () => {
  let img = document.querySelectorAll(".charPic");
  let back = document.querySelector(".main");
- back.classList.add("lugi"); 
+ this.setState({theamname: "Lugis"}); 
+ back.classList.add("lugi");
+ back.classList.remove("peach"); 
  for (let i of img){
    i.src = require("./lugi_new.png");
  }
 }
+peach = () => {
+  let img = document.querySelectorAll(".charPic");
+  let back = document.querySelector(".main");
+  this.setState({theamname: "Peachs"}); 
+  back.classList.add("peach");
+  back.classList.remove("lugi"); 
+  for (let i of img){
+    i.src = require("./peach_new.png");
+  }
+ }
   render() {
     
     return (
+       
     <div className="mainRoot">
+    <div className="themBack">
     <span className="themText"><b>Choose Theme: </b></span>
     <span className="themIcon"><img alt="mario" src={require("./mario_new.png")} onClick={this.mario}/></span>
     <span className="themIcon"><img alt="lugi" src={require("./lugi_new.png")} onClick={this.lugi}/></span>
+    <span className="themIcon"><img alt="peach" src={require("./peach_new.png")} onClick={this.peach}/></span>
+    </div>
     <div className="mainHeader">
-    <b><span role="img" aria-label="emoji1"> 🍄 </span> Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
+    <b><span role="img" aria-label="emoji1"> 🍄 </span>{this.state.theamname} Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
     <span className="mainChatName"><b>Signed in as:</b> {this.state.username}</span>
     <button onClick={this.props.onOut} className="closeChat" title="Logout">Logout</button>
     </div>

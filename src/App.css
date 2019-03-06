@@ -14,6 +14,9 @@ body{
 .lugi{
   background-image: url(mainChatBack2.jpg);
 }
+.peach{
+  background-image: url(mainChatBack3.jpg);
+}
 .main{
   width: 800px;
   height: 445px;
@@ -155,13 +158,27 @@ body{
 .themIcon{
   position: relative;
   margin-left: 10px;
-  top:8px;
+  top: 3px;
   left: 20px;
   cursor: pointer;
 }
 .themText{
   position: relative;
-  left: 30px;
-  top: -3px;
+  left: 25px;
+  top: -6px;
   color:white;
+}
+.themBack{
+  width: 285px;
+  height: 40px;
+  background-color: #719684;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.mario_login{
+  position: relative;
+  width: 200px;
+  left: 50%;
+  top: 50px;
+  transform: translate(-50%, 0%);
 }

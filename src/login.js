@@ -42,6 +42,8 @@ class Login extends Component {
     render (){
         
         return (
+          <>
+                <img className="mario_login" alt="mario_login" src={require("./login_mario.png")}/>
                 <div className="mainLogin">
                 <div className="mainLoginTitle">Chat Login:</div><br/>
                 <input className="mainLoginInput" type="text" maxLength="12" onChange={this.onChange} placeholder="Login Name"/>
@@ -49,6 +51,7 @@ class Login extends Component {
                 <div id="loginMess1" className="loginMess"></div>
                 <div id="loginMess2" className="loginMess"></div>
                 </div>
+          </>      
                 );
     }
   }
