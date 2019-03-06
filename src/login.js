@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-export let loginObj = {loginName:""};
 
 function filterLetter(inputtxt){
    let btn = document.querySelector(".loginBtn");
    let mess1 = document.querySelector("#loginMess1");
    let mess2 = document.querySelector("#loginMess2");
    let letters = /^[0-9a-zA-Z_-\s]+$/;
-     btn.setAttribute("disabled", "disabled");
 
-   if(inputtxt.match(letters)){
+    if(inputtxt.match(letters)){
      btn.removeAttribute("disabled");
      mess1.textContent = "";
      mess2.textContent = "";
@@ -20,16 +18,13 @@ function filterLetter(inputtxt){
         btn.setAttribute("disabled", "disabled");
         mess1.textContent = "Login name between 1 to 12 letters.";
         mess2.textContent = "Approved characters (0-9 a-z A-Z _-)";
-        
      }
   }
 
 class Login extends Component {
     constructor(props) {
       super(props);
-      this.state = {login: "", isLoggedIn: false};
-      this.onChange = this.onChange.bind(this);
-      this.loginName = this.loginName.bind(this);
+      this.state = {login: null, isLoggedIn: false};
     }
 
     componentDidMount(){
@@ -37,11 +32,7 @@ class Login extends Component {
         filterLetter("");   
     }
     
-    loginName(){
-        this.props.onLogin();
-    }
-    
-    onChange(e){
+    onChange = (e) =>{
         let value = e.target.value;
         let validText = filterLetter(value);
         loginObj.loginName = validText;
@@ -54,7 +45,7 @@ class Login extends Component {
                 <div className="mainLogin">
                 <div className="mainLoginTitle">Chat Login:</div><br/>
                 <input className="mainLoginInput" type="text" maxLength="12" onChange={this.onChange} placeholder="Login Name"/>
-                <button className="loginBtn" onClick={this.loginName}>Login</button>
+                <button className="loginBtn" onClick={this.props.onLogin}>Login</button>
                 <div id="loginMess1" className="loginMess"></div>
                 <div id="loginMess2" className="loginMess"></div>
                 </div>
@@ -63,4 +54,4 @@ class Login extends Component {
   }
 
   export default Login;
-  
+  export let loginObj = {loginName:""};  

@@ -8,6 +8,12 @@ body{
   transform: translate(-50%, 0%);
 
 }
+.mario{
+  background-image: url(mainChatBack.jpg);
+}
+.lugi{
+  background-image: url(mainChatBack2.jpg);
+}
 .main{
   width: 800px;
   height: 445px;
@@ -17,7 +23,6 @@ body{
   padding-bottom: 3px;
   overflow-x: auto;
   border-radius: 0px 0px 5px 5px;
-  background-image: url(mainChatBack.jpg);
   word-break: break-all;
 }
 .mainHeader{
@@ -127,7 +132,7 @@ body{
   color: #252c24;
 }
 .textError{
-  color: red;
+  color:white;
   margin-left: 10px;
 }
 .mainLoginInput{
@@ -146,4 +151,17 @@ body{
  position: relative;
  top: 9px;
  margin-right: 3px;
+}
+.themIcon{
+  position: relative;
+  margin-left: 10px;
+  top:8px;
+  left: 20px;
+  cursor: pointer;
+}
+.themText{
+  position: relative;
+  left: 30px;
+  top: -3px;
+  color:white;
 }

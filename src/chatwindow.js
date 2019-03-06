@@ -10,17 +10,6 @@ function convertUrlEmoji(str){
   return <Linkify tagName="span" options={options}>{content}</Linkify>;
     }
 
-function createUser(str) {
-
-  return (
-  <div key={str.id}><br/>
-  <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
-  <span className="userName"><span className="marioPic"><img  alt="mario" src={require("./mario_new.png")}/></span><b>{" - " + str.username + " - "}</b></span>
-  <span className="userMess">{convertUrlEmoji(str.content)}</span>
-  </div>
-  );
-}
-
 function scrollBottom(){
   let element = document.querySelector(".main");
       element.scrollTop = element.scrollHeight;
@@ -31,11 +20,21 @@ function Unix_timestamp(t){
   return ts.toLocaleString() + " ";
 }
 
+function createUser(str) {
+  
+  return (
+  <div key={str.id}><br/>
+  <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
+  <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./mario_new.png")}/></span><b>{" - " + str.username + " - "}</b></span>
+  <span className="userMess">{convertUrlEmoji(str.content)}</span>
+  </div>
+  );
+}
+
 class ChatWindow extends Component {
   
   constructor(props) {
     super(props);
-    
     this.state = {
      username: "",
      content: "",
@@ -47,9 +46,6 @@ class ChatWindow extends Component {
       timestamp: 0,
     },
   ]};
-  this.onClick = this.onClick.bind(this);
-  this.onChange = this.onChange.bind(this);
-  this.onLogOut = this.onLogOut.bind(this);
 }
   
   componentDidMount() {
@@ -58,9 +54,7 @@ class ChatWindow extends Component {
     this.socket.on('messages', function(data){
       this.setState({ messages: data });
     }.bind(this));
-    
     this.setState({username: loginObj.loginName});
-    
     this.socket.on('new_message', function(data){
       this.setState({messages: [...this.state.messages, data]});
    }.bind(this));
@@ -75,48 +69,61 @@ class ChatWindow extends Component {
     this.socket = null;
 }
   
-  onChange(e){
-    let value = e.target.value;
-      this.setState({content:value});
+  onChange = (e) => this.setState({content:e.target.value});
+
+  onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      this.onClick();
+    }
   }
-  
-  onClick(){
+    
+  onClick = () => {
     let textarea = document.querySelector(".inputText");
     if (textarea.value !== ""){
       textarea.value = "";
-    this.socket.emit('message', {
-      username: this.state.username,
-      content: this.state.content ,
+      this.socket.emit('message', {
+        username: this.state.username,
+        content: this.state.content ,
       }, (response) => {
-        if (response.status === "error"){
-          console.log("Fel");
-        }
-
-        let x = response.data.newMessage;
-        this.setState({messages: [...this.state.messages, x]});
+        this.setState({messages: [...this.state.messages, response.data.newMessage]});
       });
-      document.querySelector(".textError").innerHTML = "";
+      textarea.placeholder = "Write Chat Text...";
     }
     else{
-      document.querySelector(".textError").innerHTML = "Must type in text in the chat box to send message...";
+      textarea.placeholder = "Must type in text in the chat box to send message...";
     }
   }
-
-  onLogOut(){
-    this.props.onOut();
+mario = () => {
+  let img = document.querySelectorAll(".charPic");
+  let back = document.querySelector(".main");
+  back.classList.remove("lugi");
+  for (let i of img){
+    i.src = require("./mario_new.png");
   }
-
+  }
+lugi = () => {
+ let img = document.querySelectorAll(".charPic");
+ let back = document.querySelector(".main");
+ back.classList.add("lugi"); 
+ for (let i of img){
+   i.src = require("./lugi_new.png");
+ }
+}
   render() {
-    let x = this.state.messages.map(createUser);
+    
     return (
     <div className="mainRoot">
+    <span className="themText"><b>Choose Theme: </b></span>
+    <span className="themIcon"><img alt="mario" src={require("./mario_new.png")} onClick={this.mario}/></span>
+    <span className="themIcon"><img alt="lugi" src={require("./lugi_new.png")} onClick={this.lugi}/></span>
     <div className="mainHeader">
     <b><span role="img" aria-label="emoji1"> 🍄 </span> Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
     <span className="mainChatName"><b>Signed in as:</b> {this.state.username}</span>
-    <button onClick={this.onLogOut} className="closeChat" title="Logout">Logout</button>
+    <button onClick={this.props.onOut} className="closeChat" title="Logout">Logout</button>
     </div>
-    <div className="main">{x}</div>
-    <textarea maxLength="200" placeholder="Write Chat Text..." onChange={this.onChange} className="inputText" type="text"/>
+    <div className="main mario">{this.state.messages.map(createUser)}</div>
+    <textarea maxLength="200" placeholder="Write Chat Text..." onChange={this.onChange} onKeyDown={this.onEnterPress} className="inputText" type="text"/>
     <button onClick={this.onClick} className="sendBtn">Send</button>
     <div className="textError"></div>
     </div>
