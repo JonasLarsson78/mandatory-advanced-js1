@@ -17,6 +17,9 @@ body{
 .peach{
   background-image: url(mainChatBack3.jpg);
 }
+.yoshi{
+  background-image: url(mainChatBack4.jpg);
+}
 .main{
   width: 800px;
   height: 445px;
@@ -27,6 +30,7 @@ body{
   overflow-x: auto;
   border-radius: 0px 0px 5px 5px;
   word-break: break-all;
+  background-color: white;
 }
 .mainHeader{
   position: relative;
@@ -166,10 +170,10 @@ body{
   position: relative;
   left: 25px;
   top: -6px;
-  color:white;
+  color:#252c24;
 }
 .themBack{
-  width: 285px;
+  width: 330px;
   height: 40px;
   background-color: #719684;
   margin-left: 10px;
@@ -181,4 +185,7 @@ body{
   left: 50%;
   top: 50px;
   transform: translate(-50%, 0%);
+}
+.chatNameColor{
+  color: white;
 }

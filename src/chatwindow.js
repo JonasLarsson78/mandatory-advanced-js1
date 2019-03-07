@@ -85,7 +85,7 @@ class ChatWindow extends Component {
       }, (response) => {
         this.setState({messages: [...this.state.messages, response.data.newMessage]});
       });
-      textarea.placeholder = "Write Chat Text...";
+      textarea.placeholder = "Write chat text and press send or hit enter...";
     }
     else{
       textarea.placeholder = "Must type in text in the chat box to send message...";
@@ -97,6 +97,7 @@ mario = () => {
   let back = document.querySelector(".main");
   back.classList.remove("lugi");
   back.classList.remove("peach");
+  back.classList.remove("yoshi");
   this.setState({theamname: "Marios"});
   for (let i of img){
     i.src = require("./mario_new.png");
@@ -107,7 +108,8 @@ lugi = () => {
  let back = document.querySelector(".main");
  this.setState({theamname: "Lugis"}); 
  back.classList.add("lugi");
- back.classList.remove("peach"); 
+ back.classList.remove("peach");
+ back.classList.remove("yoshi"); 
  for (let i of img){
    i.src = require("./lugi_new.png");
  }
@@ -117,29 +119,42 @@ peach = () => {
   let back = document.querySelector(".main");
   this.setState({theamname: "Peachs"}); 
   back.classList.add("peach");
-  back.classList.remove("lugi"); 
+  back.classList.remove("lugi");
+  back.classList.remove("yoshi"); 
   for (let i of img){
     i.src = require("./peach_new.png");
   }
  }
+ yoshi = () => {
+  let img = document.querySelectorAll(".charPic");
+  let back = document.querySelector(".main");
+  this.setState({theamname: "Yoshis"}); 
+  back.classList.add("yoshi");
+  back.classList.remove("lugi");
+  back.classList.remove("peach"); 
+  for (let i of img){
+    i.src = require("./yoshi_new.png");
+  }
+ }
+
   render() {
     
     return (
-       
     <div className="mainRoot">
     <div className="themBack">
     <span className="themText"><b>Choose Theme: </b></span>
     <span className="themIcon"><img alt="mario" src={require("./mario_new.png")} onClick={this.mario}/></span>
     <span className="themIcon"><img alt="lugi" src={require("./lugi_new.png")} onClick={this.lugi}/></span>
     <span className="themIcon"><img alt="peach" src={require("./peach_new.png")} onClick={this.peach}/></span>
+    <span className="themIcon"><img alt="yoshi" src={require("./yoshi_new.png")} onClick={this.yoshi}/></span>
     </div>
     <div className="mainHeader">
     <b><span role="img" aria-label="emoji1"> 🍄 </span>{this.state.theamname} Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
-    <span className="mainChatName"><b>Signed in as:</b> {this.state.username}</span>
+    <span className="mainChatName"><b>Signed in as:</b><span className="chatNameColor"> {this.state.username}</span></span>
     <button onClick={this.props.onOut} className="closeChat" title="Logout">Logout</button>
     </div>
     <div className="main mario">{this.state.messages.map(createUser)}</div>
-    <textarea maxLength="200" placeholder="Write Chat Text..." onChange={this.onChange} onKeyDown={this.onEnterPress} className="inputText" type="text"/>
+    <textarea maxLength="200" placeholder="Write chat text and press send or hit enter..." onChange={this.onChange} onKeyDown={this.onEnterPress} className="inputText" type="text"/>
     <button onClick={this.onClick} className="sendBtn">Send</button>
     <div className="textError"></div>
     </div>
