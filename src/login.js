@@ -43,7 +43,7 @@ class Login extends Component {
         
         return (
           <>
-                <img className="mario_login" alt="mario_login" src={require("./login_mario.png")}/>
+                <img className="mario_login" alt="mario_login" src={require("./pics/login_mario.png")}/>
                 <div className="mainLogin">
                 <div className="mainLoginTitle">Chat Login:</div><br/>
                 <input className="mainLoginInput" type="text" maxLength="12" onChange={this.onChange} placeholder="Login Name"/>

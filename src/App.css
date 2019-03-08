@@ -1,5 +1,5 @@
 body{
-  background: url(back_chat.jpg);
+  background: url(./pics/back_chat.jpg);
 }
 .mainRoot{
   position: absolute;
@@ -9,16 +9,16 @@ body{
 
 }
 .mario{
-  background-image: url(mainChatBack.jpg);
+  background-image: url(./pics/mainChatBack.jpg);
 }
 .lugi{
-  background-image: url(mainChatBack2.jpg);
+  background-image: url(./pics/mainChatBack2.jpg);
 }
 .peach{
-  background-image: url(mainChatBack3.jpg);
+  background-image: url(./pics/mainChatBack3.jpg);
 }
 .yoshi{
-  background-image: url(mainChatBack4.jpg);
+  background-image: url(./pics/mainChatBack4.jpg);
 }
 .main{
   width: 800px;
@@ -187,5 +187,8 @@ body{
   transform: translate(-50%, 0%);
 }
 .chatNameColor{
+  margin-left: 5px;
+  font-size: 20px;
   color: white;
+  -webkit-text-stroke: 0.7px #252c24;
 }

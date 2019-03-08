@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link id="favicon" rel="shortcut icon" type="icon" href="./favicons/favicon_mario.ico"/>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -27,6 +27,10 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <audio id="myAudio">
+      <source src="./mario.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
