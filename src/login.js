@@ -28,7 +28,8 @@ class Login extends Component {
     }
 
     componentDidMount(){
-        document.title = 'Chat Login'   
+        document.title = 'Chat Login'
+        document.querySelector("#favicon").href = "./favicons/favicon_mario.ico";   
         filterLetter("");   
     }
     

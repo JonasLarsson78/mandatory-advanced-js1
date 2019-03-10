@@ -39,11 +39,10 @@ function createUser(str) {
   else if(selectYoshi === true){
     url = "yoshi_new.png";
   }
-  
   return (
   <div key={str.id}><br/>
   <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
-  <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./pics/"+url)}/></span><b>{" " + str.username + "  🠚 "}</b></span>
+  <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./pics/" + url)}/></span><b>{" " + str.username + "  🠚 "}</b></span>
   <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
   );
@@ -84,7 +83,14 @@ class ChatWindow extends Component {
 
   componentDidUpdate = () => scrollBottom();
 
-  componentWillUnmount = () => this.socket.disconnect();
+  componentWillUnmount = () => {
+    this.socket.disconnect();
+    this.socket = null;
+    selectMario = true;
+    selectLugi = false;
+    selectPeach = false;
+    selectYoshi = false;
+  }
   
   onChange = (e) => this.setState({content: e.target.value});
 
