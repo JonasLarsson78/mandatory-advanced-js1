@@ -16,19 +16,42 @@ function scrollBottom(){
       element.scrollTop = element.scrollHeight;
 }
 
-function Unix_timestamp(t){
-  let ts = new Date(t);
+function Unix_timestamp(time){
+  let ts = new Date(time);
   return ts.toLocaleString() + " ";
 }
+
 function createUser(str) {
+
+  function ur(){
+    let text = document.querySelector("#theamName");
+    
+    if (text === null){
+      text = "Marios"
+    }
+    if (text.textContent === "Marios"){
+      return   <img className="charPic" alt="mario" src={require("./pics/mario_new.png")}/>
+    }
+    else if (text.textContent === "Lugis"){
+      return   <img className="charPic" alt="lugi" src={require("./pics/lugi_new.png")}/>
+    }
+    else if (text.textContent === "Peachs"){
+      return   <img className="charPic" alt="peach" src={require("./pics/peach_new.png")}/>
+    }
+    else if (text.textContent === "Yoshis"){
+      return   <img className="charPic" alt="yoshi" src={require("./pics/yoshi_new.png")}/>
+    }
+  }
+
   return (
   <div key={str.id}><br/>
   <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
-  <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./pics/mario_new.png")}/></span><b>{" " + str.username + "  🠚 "}</b></span>
+  <span className="userName"><span className="marioPic">{ur()}</span><b>{" " + str.username + "  🠚 "}</b></span>
   <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
   );
 }
+
 function playAudio() { 
   let x = document.getElementById("myAudio");
   x.play(); 
@@ -63,15 +86,9 @@ class ChatWindow extends Component {
    }.bind(this));
   }
 
-  componentDidUpdate() {
-    scrollBottom();
-    
-}
+  componentDidUpdate = () => scrollBottom();
 
-  componentWillUnmount(){
-    this.socket.disconnect();
-    this.socket = null;
-}
+  componentWillUnmount = () => this.socket.disconnect();
   
   onChange = (e) => this.setState({content: e.target.value});
 
@@ -83,6 +100,7 @@ class ChatWindow extends Component {
   }
     
   onClick = () => {
+    
     let textarea = document.querySelector(".inputText");
     if (textarea.value !== ""){
       textarea.value = "";
@@ -165,7 +183,7 @@ peach = () => {
     <span className="themIcon"><img alt="yoshi" src={require("./pics/yoshi_new.png")} onClick={this.yoshi}/></span>
     </div>
     <div className="mainHeader">
-    <b><span role="img" aria-label="emoji1"> 🍄 </span>{this.state.theamname} Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
+    <b><span role="img" aria-label="emoji1"> 🍄 </span><span id="theamName">{this.state.theamname}</span> Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
     <span className="mainChatName"><b>Signed in as: <span className="chatNameColor"> {this.state.username}</span></b></span>
     <button onClick={this.props.onOut} className="closeChat" title="Logout">Logout</button>
     </div>
