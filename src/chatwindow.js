@@ -3,6 +3,10 @@ import io from 'socket.io-client';
 import { loginObj } from './login';
 import { emojify } from 'react-emojione';
 const Linkify = require('linkifyjs/react');
+let selectMario = true;
+let selectLugi = false;
+let selectPeach = false;
+let selectYoshi = false;
 
 function convertUrlEmoji(str){
   
@@ -22,31 +26,24 @@ function Unix_timestamp(time){
 }
 
 function createUser(str) {
-
-  function ur(){
-    let text = document.querySelector("#theamName");
-    
-    if (text === null){
-      text = "Marios"
-    }
-    if (text.textContent === "Marios"){
-      return   <img className="charPic" alt="mario" src={require("./pics/mario_new.png")}/>
-    }
-    else if (text.textContent === "Lugis"){
-      return   <img className="charPic" alt="lugi" src={require("./pics/lugi_new.png")}/>
-    }
-    else if (text.textContent === "Peachs"){
-      return   <img className="charPic" alt="peach" src={require("./pics/peach_new.png")}/>
-    }
-    else if (text.textContent === "Yoshis"){
-      return   <img className="charPic" alt="yoshi" src={require("./pics/yoshi_new.png")}/>
-    }
+  let url = "";
+  if(selectMario === true){
+    url = "mario_new.png";
   }
-
+  else if(selectLugi === true){
+    url = "lugi_new.png";
+  }
+  else if(selectPeach === true){
+    url = "peach_new.png";
+  }
+  else if(selectYoshi === true){
+    url = "yoshi_new.png";
+  }
+  
   return (
   <div key={str.id}><br/>
   <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
-  <span className="userName"><span className="marioPic">{ur()}</span><b>{" " + str.username + "  🠚 "}</b></span>
+  <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./pics/"+url)}/></span><b>{" " + str.username + "  🠚 "}</b></span>
   <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
   );
@@ -75,7 +72,6 @@ class ChatWindow extends Component {
   componentDidMount() {
     document.title = 'Marios Chat Window';
     this.socket = io('http://ec2-13-53-66-202.eu-north-1.compute.amazonaws.com:3000');
-    
     this.socket.on('messages', function(data){
     this.setState({ messages: data });
     }.bind(this));
@@ -110,15 +106,21 @@ class ChatWindow extends Component {
       }, (response) => {
         playAudio();
         this.setState({messages: [...this.state.messages, response.data.newMessage]});
+        
       });      
       textarea.placeholder = "Write chat text and press send or hit enter...";
     }
     else{
       textarea.placeholder = "Must type in text in the chat box to send message...";
     }
+    
   }
 
 mario = () => {
+  selectMario = true;
+  selectLugi = false;
+  selectPeach = false;
+  selectYoshi = false;
   document.title = 'Marios Chat Window';
   document.querySelector("#favicon").href = "./favicons/favicon_mario.ico";
   let img = document.querySelectorAll(".charPic");
@@ -126,12 +128,16 @@ mario = () => {
   back.classList.remove("lugi");
   back.classList.remove("peach");
   back.classList.remove("yoshi");
-  this.setState({theamname: "Marios"});
+  this.setState({theamname:"Marios"});
   for (let i of img){
     i.src = require("./pics/mario_new.png");
   }
   }
 lugi = () => {
+ selectMario = false;
+ selectLugi = true;
+ selectPeach = false;
+ selectYoshi = false; 
  document.title = 'Lugis Chat Window';
  document.querySelector("#favicon").href = "./favicons/favicon_lugi.ico";
  let img = document.querySelectorAll(".charPic");
@@ -145,6 +151,10 @@ lugi = () => {
  }
 }
 peach = () => {
+  selectMario = false;
+  selectLugi = false;
+  selectPeach = true;
+  selectYoshi = false;
   document.querySelector("#favicon").href = "./favicons/favicon_peach.ico";
   document.title = 'Peachs Chat Window';
   let img = document.querySelectorAll(".charPic");
@@ -158,6 +168,10 @@ peach = () => {
   }
  }
  yoshi = () => {
+  selectMario = false;
+  selectLugi = false;
+  selectPeach = false;
+  selectYoshi = true;
   document.querySelector("#favicon").href = "./favicons/favicon_yoshi.ico";
   document.title = 'Yoshis Chat Window'; 
   let img = document.querySelectorAll(".charPic");
