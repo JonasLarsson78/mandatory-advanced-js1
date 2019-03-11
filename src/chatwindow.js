@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import { loginObj } from './login';
 import { emojify } from 'react-emojione';
 const Linkify = require('linkifyjs/react');
 let selectMario = true;
@@ -57,7 +56,7 @@ class ChatWindow extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {theamname: "Marios", username: "", content: "",
+    this.state = {theamname: "Marios", content: "",
      messages: [
     {
       id: "",
@@ -74,7 +73,7 @@ class ChatWindow extends Component {
     this.socket.on('messages', function(data){
     this.setState({ messages: data });
     }.bind(this));
-    this.setState({username: loginObj.loginName});
+    //this.setState({username: loginObj.loginName});
     this.socket.on('new_message', function(data){
       playAudio();
     this.setState({messages: [...this.state.messages, data]});
@@ -108,7 +107,7 @@ class ChatWindow extends Component {
     if (textarea.value !== ""){
       textarea.value = "";
       this.socket.emit('message', {
-        username: this.state.username,
+        username: this.props.name,
         content: this.state.content ,
       }, (response) => {
         playAudio();
@@ -205,7 +204,7 @@ peach = () => {
     </div>
     <div className="mainHeader">
     <b><span role="img" aria-label="emoji1"> 🍄 </span><span id="theamName">{this.state.theamname}</span> Chat Window <span aria-label="emoji2" role="img"> 🍄 </span></b>
-    <span className="mainChatName"><b>Signed in as: <span className="chatNameColor"> {this.state.username}</span></b></span>
+    <span className="mainChatName"><b>Signed in as: <span className="chatNameColor"> {this.props.name}</span></b></span>
     <button onClick={this.props.onOut} className="closeChat" title="Logout">Logout</button>
     </div>
     <div className="main mario">{this.state.messages.map(createUser)}</div>
