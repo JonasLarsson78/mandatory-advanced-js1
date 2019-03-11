@@ -86,6 +86,7 @@ class ChatWindow extends Component {
   componentWillUnmount = () => {
     this.socket.disconnect();
     this.socket = null;
+    
     selectMario = true;
     selectLugi = false;
     selectPeach = false;
