@@ -25,6 +25,7 @@ function Unix_timestamp(time){
 }
 
 function createUser(str) {
+
   let url = "";
   if(selectMario === true){
     url = "mario_new.png";
@@ -40,7 +41,7 @@ function createUser(str) {
   }
   return (
   <div key={str.id}><br/>
-  <span className="messTime"><b>{Unix_timestamp(str.timestamp)}</b></span><br/>
+  <span className="messTime"><b>{Unix_timestamp(str.date)}</b></span><br/>
   <span className="userName"><span className="marioPic"><img className="charPic" alt="mario" src={require("./pics/" + url)}/></span><b>{" " + str.username + "  🠚 "}</b></span>
   <span className="userMess">{convertUrlEmoji(str.content)}</span>
   </div>
@@ -59,17 +60,17 @@ class ChatWindow extends Component {
     this.state = {theamname: "Marios", content: "",
      messages: [
     {
-      id: "",
-      username: "",
-      content: "",
-      timestamp: 0,
+      id: "1",
+      username: "Mario",
+      content: "Hej! skriv något i chaten.",
+      date: new Date(),
     },
   ]};
 }
   
   componentDidMount() {
     document.title = 'Marios Chat Window';
-    this.socket = io('http://ec2-13-53-66-202.eu-north-1.compute.amazonaws.com:3000');
+    this.socket = io('http://localhost:3010');
     this.socket.on('messages', function(data){
     this.setState({ messages: data });
     }.bind(this));
