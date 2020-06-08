@@ -70,7 +70,7 @@ class ChatWindow extends Component {
   
   componentDidMount() {
     document.title = 'Marios Chat Window';
-    this.socket = io('http://localhost:3010');
+    this.socket = io('https://floating-thicket-95873.herokuapp.com');
     this.socket.on('messages', function(data){
     this.setState({ messages: data });
     }.bind(this));
